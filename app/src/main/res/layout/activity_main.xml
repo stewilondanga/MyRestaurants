@@ -4,33 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="io.github.stewilondanga.myrestaurants.MainActivity">
+    tools:context="io.github.stewilondanga.myrestaurants.MainActivity"
+    android:background="@color/primary_text">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/dine" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MyRestaurants"
+        android:layout_marginTop="35dp"
+        android:id="@+id/textView"
+        android:textColor="@color/accent"
+        android:textSize="40sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
-        android:textColor="@color/icons"
-        android:id="@+id/textView" />
+        android:textStyle="bold"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Find Restaurants"
-        android:id="@+id/button"
-        android:background="@color/accent"
-        android:textColor="@color/icons"
+        android:id="@+id/findRestaurantsButton"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/dine" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/accent"
+        android:textColor="@color/icons" />
 
 </RelativeLayout>
