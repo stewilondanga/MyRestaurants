@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.ListView;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+import android.widget.AdapterView;
+import android.view.View;
 
 public class RestaurantsActivity extends AppCompatActivity {
     private TextView mLocationTextView;
@@ -19,6 +23,17 @@ public class RestaurantsActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.listView);
         mLocationTextView = (TextView) findViewById(R.id.locationTextView);
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, restaurants);
+        mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long 1) {
+                String restaurant = ((TextView)view).getText().toString();
+                Toast.makeText(RestaurantsActivity.this, "restaurant", Toast.LENGTH_LONG).show();
+            }
+        });
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
