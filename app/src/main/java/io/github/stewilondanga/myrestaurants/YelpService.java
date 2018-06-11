@@ -42,6 +42,7 @@ public class YelpService {
 
         Call call = client.newCall(request);
         call.enqueue(callback);
+    }
 
     public List<Restaurants> processResults(Response response) {
         List<Restaurants> restaurants = new ArrayList<>();
@@ -49,21 +50,24 @@ public class YelpService {
             try {
                 String jsonData = response.body().string;
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     //The response JSON is an array of business objects within an object so we need to get that array
                     JSONObject yelpJSON = new JSONObject(jsonData);
                     JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
 
-                    Type collectionType = new TypeToken<List><Restaurants>>() {}.getType();
+                    Type collectionType = new TypeToken<List< Restaurants >> () {}.getType();
                     Gson gson = new GsonBuilder().create();
                     restaurants = gson.fromJson(businessesJSON.toString(), collectionType);
                 }
             }
-        } catch (JSONException | NullPointerException | IOException e) {
+        catch(JSONException |NullPointerException |
+        IOException e)
+
+        {
             e.printStackTrace();
         }
 
-        return restaurants;
+            return restaurants;
     }
 }
 
