@@ -36,7 +36,7 @@ public class YelpService {
         String url = urlBuilder.build().toString();
 
         Request request = new Request.Builder()
-                .header("Authorization", "Bearee " + Constants.API_KEY)
+                .header("Authorization", "Bearer " + Constants.API_KEY)
                 .url(url)
                 .build();
 
@@ -59,12 +59,8 @@ public class YelpService {
                     Gson gson = new GsonBuilder().create();
                     restaurants = gson.fromJson(businessesJSON.toString(), collectionType);
                 }
-            }
-        catch(JSONException |NullPointerException |
-        IOException e)
-
-        {
-            e.printStackTrace();
+            } catch(JSONException | NullPointerException | IOException e) {
+                    e.printStackTrace();
         }
 
             return restaurants;
