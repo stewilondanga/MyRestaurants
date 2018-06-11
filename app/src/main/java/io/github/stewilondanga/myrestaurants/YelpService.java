@@ -28,9 +28,9 @@ import okhttp3.Response;
  */
 
 public class YelpService {
-    public static OkHttpClient client = new OkHttpClient();
+    private static OkHttpClient client = new OkHttpClient();
 
-    public static void findRestaurants(String location, okhttp3.Callback callback) {
+    private static void findRestaurants(String location, okhttp3.Callback callback) {
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.YELP_BASE_URL).newBuilder();
         urlBuilder.addQueryParameter(Constants.YELP_LOCATION_QUERY, location);
         String url = urlBuilder.build().toString();
@@ -42,29 +42,31 @@ public class YelpService {
 
         Call call = client.newCall(request);
         call.enqueue(callback);
-    }
 
-    public List<Restaurants> processResults(Response response){
+    public List<Restaurants> processResults(Response response) {
         List<Restaurants> restaurants = new ArrayList<>();
 
-        try {
-            String jsonData = response.body().string;
+            try {
+                String jsonData = response.body().string;
 
-            if (response.isSuccessful()){
-                //The response JSON is an array of business objects within an object so we need to get that array
-                JSONObject yelpJSON = new JSONObject(jsonData);
-                JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
+                if (response.isSuccessful()){
+                    //The response JSON is an array of business objects within an object so we need to get that array
+                    JSONObject yelpJSON = new JSONObject(jsonData);
+                    JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
 
-                Type collectionType = new TypeToken<List><Restaurants>>() {}.getType();
-                Gson gson = new GsonBuilder().create();
-                restaurants = gson.fromJson(businessesJSON.toString(), collectionType);
+                    Type collectionType = new TypeToken<List><Restaurants>>() {}.getType();
+                    Gson gson = new GsonBuilder().create();
+                    restaurants = gson.fromJson(businessesJSON.toString(), collectionType);
+                }
             }
+        } catch (JSONException | NullPointerException | IOException e) {
+            e.printStackTrace();
         }
 
-    } catch (JSONException | NullPointerException | IOException e) {
-        e.printStackTrace();
+        return restaurants;
     }
-
-    return restaurants;
 }
+
+
+
 
