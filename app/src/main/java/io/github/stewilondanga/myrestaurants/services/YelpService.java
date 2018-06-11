@@ -1,4 +1,4 @@
-package io.github.stewilondanga.myrestaurants;
+package io.github.stewilondanga.myrestaurants.services;
 
 import javax.security.auth.callback.Callback;
 import io.github.stewilondanga.myrestaurants.Constants;

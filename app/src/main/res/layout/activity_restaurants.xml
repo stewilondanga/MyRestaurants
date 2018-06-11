@@ -7,7 +7,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    tools:context="io.github.stewilondanga.myrestaurants.RestaurantsActivity">
+    tools:context="io.github.stewilondanga.myrestaurants.ui.RestaurantsActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

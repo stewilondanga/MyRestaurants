@@ -1,4 +1,4 @@
-package io.github.stewilondanga.myrestaurants;
+package io.github.stewilondanga.myrestaurants.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,15 +7,14 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
-import android.widget.AdapterView;
-import android.view.View;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.stewilondanga.myrestaurants.R;
+import io.github.stewilondanga.myrestaurants.services.YelpService;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
