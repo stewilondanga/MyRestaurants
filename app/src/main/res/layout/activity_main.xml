@@ -34,6 +34,8 @@
         android:layout_marginBottom="10dp"
         android:padding="5dp"
         android:hint="Enter Zip Code"
+        android:textColorHint="@color/accent"
+        android:textColor="@color/primary"
         android:layout_centerHorizontal="true"/>
 
     <Button
