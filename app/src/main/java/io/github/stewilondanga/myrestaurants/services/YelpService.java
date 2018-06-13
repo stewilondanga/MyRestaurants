@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -44,18 +43,18 @@ public class YelpService {
         call.enqueue(callback);
     }
 
-    public List<Restaurants> processResults(Response response) {
-        List<Restaurants> restaurants = new ArrayList<>();
+    public List<Restaurant> processResults(Response response) {
+        List<Restaurant> restaurants = new ArrayList<>();
 
             try {
-                String jsonData = response.body().string;
+                String jsonData = response.body().string();
 
                 if (response.isSuccessful()) {
                     //The response JSON is an array of business objects within an object so we need to get that array
                     JSONObject yelpJSON = new JSONObject(jsonData);
                     JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
 
-                    Type collectionType = new TypeToken<List< Restaurants >> () {}.getType();
+                    Type collectionType = new TypeToken<List< Restaurant >> () {}.getType();
                     Gson gson = new GsonBuilder().create();
                     restaurants = gson.fromJson(businessesJSON.toString(), collectionType);
                 }

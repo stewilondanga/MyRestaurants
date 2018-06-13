@@ -8,11 +8,14 @@ import android.support.v7.widget.RecyclerView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.stewilondanga.myrestaurants.R;
 import io.github.stewilondanga.myrestaurants.adapters.RestaurantListAdapter;
+import io.github.stewilondanga.myrestaurants.models.Restaurant;
 import io.github.stewilondanga.myrestaurants.services.YelpService;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -23,7 +26,7 @@ public class RestaurantsListActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     private RestaurantListAdapter mAdapter;
 
-    public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
+    public List<Restaurant> mRestaurants = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class RestaurantsListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) {
                 mRestaurants = yelpService.processResults(response);
 
                 RestaurantsListActivity.this.runOnUiThread(new Runnable() {

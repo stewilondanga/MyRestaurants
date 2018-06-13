@@ -11,20 +11,22 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.github.stewilondanga.myrestaurants.R;
+import io.github.stewilondanga.myrestaurants.models.Restaurant;
 
 /**
  * Created by stewart on 6/11/18.
  */
 
 public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.RestaurantViewHolder>{
-    private ArrayList<Restaurant>mRestaurants = new ArrayList<>();
+    private List<Restaurant> mRestaurants = new ArrayList<>();
     private Context mContext;
 
-    public RestaurantListAdapter(Context context, ArrayList<Restaurant> restaurants) {
+    public RestaurantListAdapter(Context context, List<Restaurant> restaurants) {
         mContext = context;
         mRestaurants = restaurants;
     }
@@ -62,7 +64,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
         public void bindRestaurant(Restaurant restaurant) {
             mNameTextView.setText(restaurant.getName());
-            mCategoryTextView.setText(restaurant.getCategories().get(0));
+            mCategoryTextView.setText(restaurant.getCategories().get(0).getTitle());
             mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
             Picasso.with(mContext).load(restaurant.getImageUrl()).into(mRestaurantImageView);
         }
