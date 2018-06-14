@@ -46,6 +46,7 @@ public class RestaurantsListActivity extends AppCompatActivity {
         yelpService.findRestaurants(location, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
                 e.printStackTrace();
             }
 

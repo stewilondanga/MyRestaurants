@@ -45,6 +45,7 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
     @Override
     public int getItemCount() {
+
         return mRestaurants.size();
     }
 
