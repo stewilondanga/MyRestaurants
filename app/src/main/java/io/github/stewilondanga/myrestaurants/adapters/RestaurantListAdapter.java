@@ -22,7 +22,7 @@ import io.github.stewilondanga.myrestaurants.models.Restaurant;
  * Created by stewart on 6/11/18.
  */
 
-public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.RestaurantViewHolder>{
+public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.RestaurantViewHolder> {
     private List<Restaurant> mRestaurants = new ArrayList<>();
     private Context mContext;
 
@@ -45,15 +45,18 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
     @Override
     public int getItemCount() {
-
         return mRestaurants.size();
     }
 
     public class RestaurantViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.restaurantImageView) ImageView mRestaurantImageView;
-        @BindView(R.id.restaurantNameTextView) TextView mNameTextView;
-        @BindView(R.id.categoryTextView) TextView mCategoryTextView;
-        @BindView(R.id.ratingTextView) TextView mRatingTextView;
+        @BindView(R.id.restaurantImageView)
+        ImageView mRestaurantImageView;
+        @BindView(R.id.restaurantNameTextView)
+        TextView mNameTextView;
+        @BindView(R.id.categoryTextView)
+        TextView mCategoryTextView;
+        @BindView(R.id.ratingTextView)
+        TextView mRatingTextView;
         private Context mContext;
 
 
@@ -71,3 +74,8 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         }
     }
 }
+
+
+
+
+

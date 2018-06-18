@@ -1,29 +1,60 @@
 
 package io.github.stewilondanga.myrestaurants.models;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Restaurant {
 
+    @SerializedName("id")
+    @Expose
     private String id;
+    @SerializedName("alias")
+    @Expose
     private String alias;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("image_url")
+    @Expose
     private String imageUrl;
+    @SerializedName("is_closed")
+    @Expose
     private Boolean isClosed;
+    @SerializedName("url")
+    @Expose
     private String url;
+    @SerializedName("review_count")
+    @Expose
     private Integer reviewCount;
+    @SerializedName("categories")
+    @Expose
     private List<Category> categories = null;
+    @SerializedName("rating")
+    @Expose
     private Double rating;
+    @SerializedName("coordinates")
+    @Expose
     private Coordinates coordinates;
+    @SerializedName("transactions")
+    @Expose
     private List<Object> transactions = null;
+    @SerializedName("price")
+    @Expose
     private String price;
+    @SerializedName("location")
+    @Expose
     private Location location;
+    @SerializedName("phone")
+    @Expose
     private String phone;
+    @SerializedName("display_phone")
+    @Expose
     private String displayPhone;
+    @SerializedName("distance")
+    @Expose
     private Double distance;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * No args constructor for use in serialization
@@ -197,14 +228,6 @@ public class Restaurant {
 
     public void setDistance(Double distance) {
         this.distance = distance;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

@@ -1,21 +1,36 @@
 
 package io.github.stewilondanga.myrestaurants.models;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Location {
 
+    @SerializedName("address1")
+    @Expose
     private String address1;
-    private Object address2;
-    private Object address3;
+    @SerializedName("address2")
+    @Expose
+    private String address2;
+    @SerializedName("address3")
+    @Expose
+    private String address3;
+    @SerializedName("city")
+    @Expose
     private String city;
+    @SerializedName("zip_code")
+    @Expose
     private String zipCode;
+    @SerializedName("country")
+    @Expose
     private String country;
+    @SerializedName("state")
+    @Expose
     private String state;
+    @SerializedName("display_address")
+    @Expose
     private List<String> displayAddress = null;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * No args constructor for use in serialization
@@ -35,7 +50,7 @@ public class Location {
      * @param country
      * @param city
      */
-    public Location(String address1, Object address2, Object address3, String city, String zipCode, String country, String state, List<String> displayAddress) {
+    public Location(String address1, String address2, String address3, String city, String zipCode, String country, String state, List<String> displayAddress) {
         super();
         this.address1 = address1;
         this.address2 = address2;
@@ -55,19 +70,19 @@ public class Location {
         this.address1 = address1;
     }
 
-    public Object getAddress2() {
+    public String getAddress2() {
         return address2;
     }
 
-    public void setAddress2(Object address2) {
+    public void setAddress2(String address2) {
         this.address2 = address2;
     }
 
-    public Object getAddress3() {
+    public String getAddress3() {
         return address3;
     }
 
-    public void setAddress3(Object address3) {
+    public void setAddress3(String address3) {
         this.address3 = address3;
     }
 
@@ -109,14 +124,6 @@ public class Location {
 
     public void setDisplayAddress(List<String> displayAddress) {
         this.displayAddress = displayAddress;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }

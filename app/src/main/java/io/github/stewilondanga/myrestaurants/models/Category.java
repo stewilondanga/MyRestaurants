@@ -1,14 +1,17 @@
 
 package io.github.stewilondanga.myrestaurants.models;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Category {
 
+    @SerializedName("alias")
+    @Expose
     private String alias;
+    @SerializedName("title")
+    @Expose
     private String title;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * No args constructor for use in serialization
@@ -42,14 +45,6 @@ public class Category {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }
