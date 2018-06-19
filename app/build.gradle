@@ -36,4 +36,6 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation'org.json:json:20180130'
+    implementation 'org.parceler:parceler-api:1.1.6'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
 }
