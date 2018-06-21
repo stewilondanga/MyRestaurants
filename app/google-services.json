@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1014386175453",
+    "firebase_url": "https://myrestaurants-ccb25.firebaseio.com",
+    "project_id": "myrestaurants-ccb25",
+    "storage_bucket": "myrestaurants-ccb25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1014386175453:android:168c776dcf9186e3",
+        "android_client_info": {
+          "package_name": "io.github.stewilondanga.myrestaurants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1014386175453-3o4irkm5enpc1ij2acso3n506epf1sen.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1014386175453-3o4irkm5enpc1ij2acso3n506epf1sen.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn9-B48s0iwBG0Mb9OQhGUkKfLo1XHXdo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
