@@ -1,6 +1,8 @@
 package io.github.stewilondanga.myrestaurants.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.github.stewilondanga.myrestaurants.Constants;
 import io.github.stewilondanga.myrestaurants.R;
 import io.github.stewilondanga.myrestaurants.adapters.RestaurantListAdapter;
 import io.github.stewilondanga.myrestaurants.models.Restaurant;
@@ -25,6 +28,8 @@ public class RestaurantsListActivity extends AppCompatActivity {
     public static final String TAG = RestaurantsListActivity.class.getSimpleName();
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     private RestaurantListAdapter mAdapter;
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
 
     public List<Restaurant> mRestaurants = new ArrayList<>();
 
@@ -34,10 +39,15 @@ public class RestaurantsListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_restaurants);
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
+        //Intent intent = getIntent();
+        //String location = intent.getStringExtra("location");
+        //getRestaurants(location);
 
-        getRestaurants(location);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        if (mRecentAddress != null) {
+            getRestaurants(mRecentAddress);
+        }
     }
 
     private void getRestaurants(String location) {
