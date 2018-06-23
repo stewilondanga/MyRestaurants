@@ -26,7 +26,8 @@
                 android:value="io.github.stewilondanga.myrestaurants.ui.MainActivity" />
         </activity>
         <activity android:name=".ui.RestaurantDetailActivity" />
-        <activity android:name=".ui.SavedRestaurantListActivity"></activity>
+        <activity android:name=".ui.SavedRestaurantListActivity" />
+        <activity android:name=".ui.CreateAccountActivity"></activity>
     </application>
 
 </manifest>
