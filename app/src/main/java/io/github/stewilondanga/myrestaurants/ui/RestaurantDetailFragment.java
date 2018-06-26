@@ -16,7 +16,8 @@ import android.widget.Toast;
 import io.github.stewilondanga.myrestaurants.Constants;
 import io.github.stewilondanga.myrestaurants.R;
 import io.github.stewilondanga.myrestaurants.models.Restaurant;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -30,6 +31,9 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class RestaurantDetailFragment extends Fragment implements View.OnClickListener {
+    private static final int MAX_WIDTH = 400;
+    private static final int MAX_HEIGHT = 300;
+
     @BindView(R.id.restaurantImageView) ImageView mImageLabel;
     @BindView(R.id.restaurantNameTextView) TextView mNameLabel;
     @BindView(R.id.cuisineTextView) TextView mCategoriesLabel;
@@ -39,8 +43,6 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
     @BindView(R.id.addressTextView) TextView mAddressLabel;
     @BindView(R.id.saveRestaurantButton) TextView mSaveRestaurantButton;
 
-    private static final int MAX_WIDTH = 400;
-    private static final int MAX_HEIGHT = 300;
     private Restaurant mRestaurant;
 
     public static RestaurantDetailFragment newInstance(Restaurant restaurant) {
@@ -85,23 +87,36 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+
         if (v == mWebsiteLabel) {
             Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mRestaurant.getUrl()));
             startActivity(webIntent);
         }
+
         if (v == mPhoneLabel) {
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mRestaurant.getPhone()));
             startActivity(phoneIntent);
         }
+
         if (v == mAddressLabel) {
             Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + mRestaurant.getCoordinates().getLatitude() + "," + mRestaurant.getCoordinates().getLongitude() + "?q=(" + mRestaurant.getName() + ")"));
             startActivity(mapIntent);
         }
+
         if (v == mSaveRestaurantButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+
             DatabaseReference restaurantRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_RESTAURANTS);
-            restaurantRef.push().setValue(mRestaurant);
+                    .child(uid);
+
+            DatabaseReference pushRef = restaurantRef.push();
+            String pushId = pushRef.getKey();
+            mRestaurant.setPushId(pushId);
+            pushRef.setValue(mRestaurant);
+
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
