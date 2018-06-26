@@ -77,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStop();
         if (mAuthListener != null){
             mAuth.removeAuthStateListener(mAuthListener);
-        }git stat
         }
+    }
 
 
     @Override
