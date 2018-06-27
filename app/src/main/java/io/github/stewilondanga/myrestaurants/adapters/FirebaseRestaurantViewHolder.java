@@ -1,8 +1,11 @@
 package io.github.stewilondanga.myrestaurants.adapters;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +14,7 @@ import io.github.stewilondanga.myrestaurants.Constants;
 import io.github.stewilondanga.myrestaurants.R;
 import io.github.stewilondanga.myrestaurants.models.Restaurant;
 import io.github.stewilondanga.myrestaurants.ui.RestaurantDetailActivity;
+import io.github.stewilondanga.myrestaurants.ItemTouchHelperViewHolder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,5 +59,19 @@ public class FirebaseRestaurantViewHolder extends RecyclerView.ViewHolder {
         nameTextView.setText(restaurant.getName());
         categoryTextView.setText(restaurant.getAlias());
         ratingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+    }
+
+    @Override
+    public void onItemSelected(){
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext, R.animator.drag_scale_on);
+        set.setTarget(itemView);
+        set.start();
+    }
+
+    @Override
+    public void onItemClear(){
+        AnimatorSet set = (AnimatorSet) AnimatorInflater.loadAnimator(mContext,R.animator.drag_scale_off);
+        set.setTarget(itemView);
+        set.start();
     }
 }
