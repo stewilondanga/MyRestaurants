@@ -22,7 +22,9 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Resta
     private OnStartDragListener mOnStartDragListener;
     private Context mContext;
 
-    public FirebaseRestaurantListAdapter(Class<Restaurant> modelClass, int modelLayout, Class<FirebaseRestaurantViewHolder> viewHolderClass, Query ref, OnStartDragListener onStartDragListener, Context context) {
+    public FirebaseRestaurantListAdapter(Class<Restaurant> modelClass, int modelLayout,
+                                         Class<FirebaseRestaurantViewHolder> viewHolderClass,
+                                         Query ref, OnStartDragListener onStartDragListener, Context context) {
         super(modelClass, modelLayout, viewHolderClass, ref);
         mRef = ref.getRef();
         mOnStartDragListener = onStartDragListener;
@@ -30,10 +32,10 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Resta
     }
 
     @Override
-    protected void populateViewHolder(final FirebaseRestaurantViewHolder viewHolder, Restaurant model, int position){
+    protected void populateViewHolder(final FirebaseRestaurantViewHolder viewHolder, Restaurant model, int position) {
         viewHolder.bindRestaurant(model);
 
-        viewHolder.mRestaurantImageView.setOnTouchListener(new View.OnTouchListener()){
+        viewHolder.mRestaurantImageView.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -41,17 +43,17 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Resta
                     mOnStartDragListener.onStartDrag(viewHolder);
                 }
                 return false;
-        }
-    });
-}
+            }
+        });
+    }
 
-@Override
-public boolean onItemMove(int fromPosition, int toPosition){
-    return false;
-}
+    @Override
+    public boolean onItemMove(int fromPosition, int toPosition){
 
-@Override
-public void onItemDismiss(int position){
+        return false;
+    }
+    @Override
+    public void onItemDismiss(int position){
 
-}
+    }
 }
