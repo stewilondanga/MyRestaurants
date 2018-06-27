@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.ArrayList;
-
 import io.github.stewilondanga.myrestaurants.models.Restaurant;
 import io.github.stewilondanga.myrestaurants.ui.RestaurantDetailFragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by stewart on 6/20/18.
