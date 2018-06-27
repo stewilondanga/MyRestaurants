@@ -49,9 +49,9 @@ public class FirebaseRestaurantListAdapter extends FirebaseRecyclerAdapter<Resta
 
     @Override
     public boolean onItemMove(int fromPosition, int toPosition){
-
         return false;
     }
+
     @Override
     public void onItemDismiss(int position){
 
