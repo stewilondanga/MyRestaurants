@@ -3,12 +3,16 @@ package io.github.stewilondanga.myrestaurants.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import io.github.stewilondanga.myrestaurants.R;
+import io.github.stewilondanga.myrestaurants.models.Restaurant;
+import io.github.stewilondanga.myrestaurants.ui.RestaurantDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -18,9 +22,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.github.stewilondanga.myrestaurants.R;
-import io.github.stewilondanga.myrestaurants.models.Restaurant;
-import io.github.stewilondanga.myrestaurants.ui.RestaurantDetailActivity;
 
 /**
  * Created by stewart on 6/11/18.
@@ -29,6 +30,7 @@ import io.github.stewilondanga.myrestaurants.ui.RestaurantDetailActivity;
 public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.RestaurantViewHolder> {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
+
     private List<Restaurant> mRestaurants = new ArrayList<>();
     private Context mContext;
 
@@ -64,28 +66,32 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         public RestaurantViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
             mContext = itemView.getContext();
             itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
-            int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
-            intent.putExtra("position", itemPosition);
-            intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
-            mContext.startActivity(intent);
-        }
-
         public void bindRestaurant(Restaurant restaurant) {
-            mNameTextView.setText(restaurant.getName());
-            mCategoryTextView.setText(restaurant.getCategories().get(0).getTitle());
-            mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
             Picasso.with(mContext)
                     .load(restaurant.getImageUrl())
                     .resize(MAX_WIDTH, MAX_HEIGHT)
                     .centerCrop()
                     .into(mRestaurantImageView);
+
+            mNameTextView.setText(restaurant.getName());
+            mCategoryTextView.setText(restaurant.getCategories().get(0).getTitle());
+            mRatingTextView.setText("Rating: " + restaurant.getRating() + "/5");
+        }
+
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+
+            Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
+
+            mContext.startActivity(intent);
         }
     }
 }
