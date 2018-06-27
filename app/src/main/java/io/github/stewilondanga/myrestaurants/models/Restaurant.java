@@ -60,6 +60,7 @@ public class Restaurant {
     @Expose
     private Double distance;
     private String pushId;
+    String index;
 
     /**
      * No args constructor for use in serialization
@@ -105,6 +106,7 @@ public class Restaurant {
         this.phone = phone;
         this.displayPhone = displayPhone;
         this.distance = distance;
+        this.index = "not_specified";
     }
 
     public String getId() {
@@ -238,5 +240,13 @@ public class Restaurant {
     public String getPushId(){return pushId;}
 
     public void setPushId(String pushId) {this.pushId = pushId;}
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index){
+        this.index = index;
+    }
 
 }
