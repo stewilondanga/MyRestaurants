@@ -22,7 +22,6 @@ android {
         exclude 'META-INF/LGPL2.1'
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/NOTICE'
-        exclude 'META-INF/NOTICE'
         exclude 'META-INF/notice.txt'
     }
     buildTypes {
