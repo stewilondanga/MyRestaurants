@@ -1,6 +1,5 @@
 package io.github.stewilondanga.myrestaurants.ui;
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,12 +46,15 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
     private Restaurant mRestaurant;
     private ArrayList<Restaurant> mRestaurants;
     private int mPosition;
+    private String mSource;
 
-    public static RestaurantDetailFragment newInstance(ArrayList<Restaurant> restaurants, Integer position) {
+    public static RestaurantDetailFragment newInstance(ArrayList<Restaurant> restaurants, Integer position, String source) {
         RestaurantDetailFragment restaurantDetailFragment = new RestaurantDetailFragment();
         Bundle args =new Bundle();
-        args.putParcelable(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(restaurant));
+
+        args.putParcelable(Constants.EXTRA_KEY_RESTAURANTS, Parcels.wrap(restaurants));
         args.putInt(Constants.EXTRA_KEY_POSITION, position);
+        args.putString(Constants.KEY_SOURCE, source);
 
         restaurantDetailFragment.setArguments(args);
         return restaurantDetailFragment;
@@ -64,6 +66,8 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         mRestaurant = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_RESTAURANTS));
         mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
         mRestaurant = mRestaurants.get(mPosition);
+        mSource = getArguments().toString(Constants.KEY_SOURCE);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -87,7 +91,11 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         mPhoneLabel.setOnClickListener(this);
         mAddressLabel.setOnClickListener(this);
 
-        mSaveRestaurantButton.setOnClickListener(this);
+        if (mSource.equals(Constants.SOURCE_SAVED)) {
+            mSaveRestaurantButton.setVisibility(View.GONE);
+        } else {
+            mSaveRestaurantButton.setOnClickListener(this);
+        }
 
         return view;
     }
@@ -96,17 +104,22 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
     public void onClick(View v) {
 
         if (v == mWebsiteLabel) {
-            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(mRestaurant.getUrl()));
+            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(mRestaurant.getUrl()));
             startActivity(webIntent);
         }
 
         if (v == mPhoneLabel) {
-            Intent phoneIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mRestaurant.getPhone()));
+            Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
+                    Uri.parse("tel:" + mRestaurant.getPhone()));
             startActivity(phoneIntent);
         }
 
         if (v == mAddressLabel) {
-            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + mRestaurant.getCoordinates().getLatitude() + "," + mRestaurant.getCoordinates().getLongitude() + "?q=(" + mRestaurant.getName() + ")"));
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("geo:" + mRestaurant.getCoordinates().getLatitude()
+                            + "," + mRestaurant.getCoordinates().getLongitude()
+                            + "?q=(" + mRestaurant.getName() + ")"));
             startActivity(mapIntent);
         }
 
