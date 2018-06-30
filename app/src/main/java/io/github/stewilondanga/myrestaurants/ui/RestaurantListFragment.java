@@ -1,5 +1,6 @@
 package io.github.stewilondanga.myrestaurants.ui;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,6 +21,7 @@ import io.github.stewilondanga.myrestaurants.R;
 import io.github.stewilondanga.myrestaurants.adapters.RestaurantListAdapter;
 import io.github.stewilondanga.myrestaurants.models.Restaurant;
 import io.github.stewilondanga.myrestaurants.services.YelpService;
+import io.github.stewilondanga.myrestaurants.util.OnRestaurantSelectedListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -57,13 +59,23 @@ public class RestaurantListFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnRestaurantSelectedListener = (OnRestaurantSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
         ButterKnife.bind(this, view);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 
-        if (mRecentAddress !=null){
+        if (mRecentAddress !=null) {
             getRestaurants(mRecentAddress);
         }
 
@@ -79,6 +91,7 @@ public class RestaurantListFragment extends Fragment {
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 addToSharedPreferences(query);
@@ -102,19 +115,21 @@ public class RestaurantListFragment extends Fragment {
        final YelpService yelpService = new YelpService();
 
        yelpService.findRestaurants(location, new Callback() {
+
            @Override
            public void onFailure(Call call, IOException e) {
                e.printStackTrace();
            }
 
            @Override
-           public void onResponse(Call call, Response response) throws IOException {
+           public void onResponse(Call call, Response response) {
                 mRestaurants = yelpService.processResults(response);
 
                 getActivity().runOnUiThread(new Runnable() {
+
                     @Override
                     public void run() {
-                        mAdapter = new RestaurantListAdapter(getActivity(), mRestaurants);
+                        mAdapter = new RestaurantListAdapter(getActivity(), mRestaurants, mOnRestaurantSelectedListener);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                         mRecyclerView.setLayoutManager(layoutManager);
